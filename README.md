@@ -7,7 +7,8 @@
    dan dokumentasi serta pengujian menggunakan Scramble.
 
    document file export api dari scramble :   https://github.com/suryaoke/CRM/blob/main/document..json
-   End Point dari scramble:
+
+3 End Point dari scramble:
 ![alt text](https://github.com/suryaoke/CRM/blob/main/dokumentasi.png)
 
 4. Menggunakan spatie untuk mengatur role (Superadmin, manager, karyawan)
