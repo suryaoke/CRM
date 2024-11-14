@@ -1,0 +1,1171 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Laravel",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://crm.test/api"
+    }
+  ],
+  "security": [
+    {
+      "http": []
+    }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "operationId": "auth.login",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserloginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`UserResource`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/UserResource"
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "token": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "token"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/AuthorizationException"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationException"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "operationId": "auth.logout",
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Berhasil Logout"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/profile": {
+      "post": {
+        "operationId": "auth.updateProfile",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Profile updated successfully"
+                    },
+                    "user": {
+                      "$ref": "#/components/schemas/UserResource"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "user"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/AuthorizationException"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationException"
+          }
+        }
+      }
+    },
+    "/karyawan": {
+      "post": {
+        "operationId": "karyawan.store",
+        "tags": [
+          "Karyawan"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KaryawanStoreRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "karyawan Berhasil dibuat"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "akun": {
+                          "$ref": "#/components/schemas/UserResource"
+                        },
+                        "karyawan": {
+                          "$ref": "#/components/schemas/KaryawanResource"
+                        }
+                      },
+                      "required": [
+                        "akun",
+                        "karyawan"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Pengguna tidak ada"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/AuthorizationException"
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Perusahaan tidak ditemukan"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationException"
+          }
+        }
+      }
+    },
+    "/karyawan/update/{id}": {
+      "post": {
+        "operationId": "karyawan.update",
+        "tags": [
+          "Karyawan"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KaryawanUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Karyawan berhasil diperbarui"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "akun": {
+                          "$ref": "#/components/schemas/UserResource"
+                        },
+                        "karyawan": {
+                          "$ref": "#/components/schemas/KaryawanResource"
+                        }
+                      },
+                      "required": [
+                        "akun",
+                        "karyawan"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Pengguna tidak ada"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/AuthorizationException"
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Karyawan tidak ditemukan"
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "message"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Perusahaan tidak ditemukan"
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "message"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationException"
+          }
+        }
+      }
+    },
+    "/karyawan/delete/{id}": {
+      "delete": {
+        "operationId": "karyawan.delete",
+        "tags": [
+          "Karyawan"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Karyawan berhasil dihapus"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Pengguna tidak ada"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Karyawan tidak ditemukan"
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "message"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Perusahaan tidak ditemukan"
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "message"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/karyawan/all": {
+      "get": {
+        "operationId": "karyawan.karyawanAll",
+        "tags": [
+          "Karyawan"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/KaryawanResource"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "current_page": {
+                          "type": "string"
+                        },
+                        "total_pages": {
+                          "type": "string"
+                        },
+                        "total_items": {
+                          "type": "string"
+                        },
+                        "per_page": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "current_page",
+                        "total_pages",
+                        "total_items",
+                        "per_page"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "pagination"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Pengguna tidak ada"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Tidak ada karyawan ditemukan"
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "message"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Perusahaan tidak ditemukan"
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "message"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/karyawan/{id}": {
+      "get": {
+        "operationId": "karyawan.karyawanDetail",
+        "tags": [
+          "Karyawan"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/KaryawanResource"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Pengguna tidak ada"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Karyawan tidak ditemukan"
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "message"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Perusahaan tidak ditemukan"
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "message"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/perusahaan": {
+      "post": {
+        "operationId": "perusahaan.store",
+        "tags": [
+          "Perusahaan"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerusahaanStoreRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Perusahaan Berhasil dibuat"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "Manager": {
+                          "$ref": "#/components/schemas/UserResource"
+                        },
+                        "perusahaan": {
+                          "$ref": "#/components/schemas/PerusahaanResource"
+                        }
+                      },
+                      "required": [
+                        "Manager",
+                        "perusahaan"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/AuthorizationException"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationException"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "http": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "KaryawanResource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "nama": {
+            "type": "string"
+          },
+          "no_tlp": {
+            "type": "integer"
+          },
+          "alamat": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "nama",
+          "no_tlp",
+          "alamat"
+        ],
+        "title": "KaryawanResource"
+      },
+      "KaryawanStoreRequest": {
+        "type": "object",
+        "properties": {
+          "akun": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                },
+                "password": {
+                  "type": "string",
+                  "minLength": 6
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "password"
+              ]
+            }
+          },
+          "karyawan": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nama": {
+                  "type": "string"
+                },
+                "no_tlp": {
+                  "type": "string"
+                },
+                "alamat": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "nama",
+                "no_tlp",
+                "alamat"
+              ]
+            }
+          }
+        },
+        "required": [
+          "akun",
+          "karyawan"
+        ],
+        "title": "KaryawanStoreRequest"
+      },
+      "KaryawanUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "akun": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "maxLength": 255
+                },
+                "email": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "email"
+                },
+                "password": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "minLength": 6
+                }
+              }
+            }
+          },
+          "karyawan": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "object",
+              "properties": {
+                "nama": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "maxLength": 255
+                },
+                "no_tlp": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "maxLength": 15
+                },
+                "alamat": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "maxLength": 255
+                }
+              }
+            }
+          }
+        },
+        "title": "KaryawanUpdateRequest"
+      },
+      "PerusahaanResource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "nama_perusahaan": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserResource"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "nama_perusahaan",
+          "email",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "PerusahaanResource"
+      },
+      "PerusahaanStoreRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 6
+          },
+          "perusahaan": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nama": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                }
+              },
+              "required": [
+                "nama",
+                "email"
+              ]
+            }
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "password",
+          "perusahaan"
+        ],
+        "title": "PerusahaanStoreRequest"
+      },
+      "ProfileUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          }
+        },
+        "required": [
+          "name",
+          "email"
+        ],
+        "title": "ProfileUpdateRequest"
+      },
+      "UserResource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "email"
+        ],
+        "title": "UserResource"
+      },
+      "UserloginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 6
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "UserloginRequest"
+      }
+    },
+    "responses": {
+      "ValidationException": {
+        "description": "Validation error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Errors overview."
+                },
+                "errors": {
+                  "type": "object",
+                  "description": "A detailed description of each field that failed validation.",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "message",
+                "errors"
+              ]
+            }
+          }
+        }
+      },
+      "AuthorizationException": {
+        "description": "Authorization error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Error overview."
+                }
+              },
+              "required": [
+                "message"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
