@@ -6,7 +6,7 @@
    Menggunakan RestAPI Laravel dan autentikasi menggunkan JWT
    dan dokumentasi serta pengujian menggunakan Scramble.
 
-   document file export api dari scramble :  
+   document file export api dari scramble :   https://github.com/suryaoke/CRM/blob/main/document..json
    End Point dari scramble:
 ![alt text](https://github.com/suryaoke/CRM/blob/main/dokumentasi.png)
 
