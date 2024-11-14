@@ -11,6 +11,7 @@ use App\Models\Karyawan;
 use App\Models\Perusahaan;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class KaryawanController extends Controller
 {
@@ -171,7 +172,8 @@ class KaryawanController extends Controller
     }
 
     // Melihat semua karyawan oleh [manager, karyawan] .
-    public function KaryawanAll()
+
+    public function KaryawanAll(Request $request)
     {
         $user = Auth::guard('api')->user();
         if (!$user) {
@@ -181,8 +183,10 @@ class KaryawanController extends Controller
             ], 401);
         }
 
-
-        $perusahaan = Perusahaan::where('user_id', $user->id)->first();
+        $perusahaan = Perusahaan::where(
+            'user_id',
+            $user->id
+        )->first();
         if (!$perusahaan) {
             return response()->json([
                 'success' => false,
@@ -190,7 +194,21 @@ class KaryawanController extends Controller
             ], 404);
         }
 
-        $karyawan = Karyawan::where('perusahaan_id', $perusahaan->id)->get();
+        $search = $request->input('search', '');
+
+
+        $sortBy = $request->input('sortBy', 'nama');
+        $sortDirection = $request->input('sortDirection', 'asc');
+
+        $karyawanQuery = Karyawan::where('perusahaan_id', $perusahaan->id)
+            ->where('nama', 'like', '%' . $search . '%');
+
+
+        $karyawanQuery = $karyawanQuery->orderBy($sortBy, $sortDirection);
+
+
+        $karyawan = $karyawanQuery->paginate(10);
+
         if ($karyawan->isEmpty()) {
             return response()->json([
                 'success' => false,
@@ -201,8 +219,15 @@ class KaryawanController extends Controller
         return response()->json([
             'success' => true,
             'data' => KaryawanResource::collection($karyawan),
+            'pagination' => [
+                'current_page' => $karyawan->currentPage(),
+                'total_pages' => $karyawan->lastPage(),
+                'total_items' => $karyawan->total(),
+                'per_page' => $karyawan->perPage(),
+            ]
         ], 200);
-    } // end method
+    }
+    // end method
 
 
     // Melihat detail karyawan oleh [manager, karyawan]

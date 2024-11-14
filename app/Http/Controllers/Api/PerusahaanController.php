@@ -44,11 +44,4 @@ class PerusahaanController extends Controller
         ], 200);
     }
 
-    // Melihat semua manager oleh [Manager]//
-
-    public function manager() {}
-
-
-    // Melihat semua karyawan yang ada diperusahaannya oleh [karyawan]//\
-    public function Karryawan() {}
 }
