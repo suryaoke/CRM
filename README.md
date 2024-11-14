@@ -1,3 +1,23 @@
+1. ERD
+![alt text](https://github.com/suryaoke/CRM/blob/main/ERD%20CRM.jpg)
+
+2. Dokumentasi (API dan/atau Kebutuhan Kode).
+
+   Menggunakan RestAPI Laravel dan autentikasi menggunkan JWT
+   dan dokumentasi serta pengujian menggunakan Scramble.
+
+   document file export api dari scramble :   https://github.com/suryaoke/CRM/blob/main/document..json
+
+3 End Point dari scramble:
+![alt text](https://github.com/suryaoke/CRM/blob/main/dokumentasi.png)
+
+4. Menggunakan spatie untuk mengatur role (Superadmin, manager, karyawan)
+5. Menggunakan seeder untuk mendaftarkan role (Superadmin, manager, karyawan) dan mendaftarkan akun superadmin@gmail.com
+6. Menggunkan sofdelete pada tabel perusahaan dan karyawan
+7. Menggunakan request handler untuk validasi.
+8. Menggunakan Resource untuk format data output.
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
