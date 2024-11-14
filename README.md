@@ -1,8 +1,11 @@
-![alt text](https://github.com/suryaoke/CRM/blob/main/ERD%20CRM.jpg))
+1. ERD
+![alt text](https://github.com/suryaoke/CRM/blob/main/ERD%20CRM.jpg)
 
+2. Dokumentasi (API dan/atau Kebutuhan Kode).
 
-
-
+   Menggunakan RestApi Laravel JWT dan dokumentasi dan testing menggunakan scramble
+End Point dari scramble
+![alt text](https://github.com/suryaoke/CRM/blob/main/dokumentasi.png)
 
 
 
