@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Perusahaan extends Model
+class Karyawan extends Model
 {
-    use HasFactory,SoftDeletes;
-    protected $fillable = ['nama', 'email', 'user_id'];
+    use HasFactory, SoftDeletes;
+    protected $fillable = ['nama', 'no_tlp', 'alamat', 'user_id', 'perusahaan_id'];
 
     public function user(): BelongsTo
     {

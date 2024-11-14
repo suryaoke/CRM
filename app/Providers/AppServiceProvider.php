@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Scramble::afterOpenApiGenerated(function (OpenApi $openApi) {
             $openApi->secure(
-                SecurityScheme::http('bearer', 'JWT')
+            SecurityScheme::http('bearer', 'JWT')
             );
         });
     }
