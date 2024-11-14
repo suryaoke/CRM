@@ -1,4 +1,4 @@
-![alt text](https://github.com/suryaoke/CRM/blob/main/ERD%20CRM.jpg)?raw=true)
+![alt text](https://github.com/suryaoke/CRM/blob/main/ERD%20CRM.jpg))
 
 
 
