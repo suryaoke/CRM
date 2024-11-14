@@ -1,5 +1,4 @@
-![ERD Diagram](ERD CRM.jpg)
-
+![alt text](https://github.com/suryaoke/sepatu-store/blob/main/public/login%20sepatu.png](https://github.com/suryaoke/CRM/blob/main/ERD%20CRM.jpg)?raw=true)
 
 
 
